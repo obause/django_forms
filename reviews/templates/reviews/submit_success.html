@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danke für die Anfrage</title>
-</head>
-<body>
-    <h1>Anfrage erhalten</h1>
-    <h4>Danke für die Anfrage</h4>
-</body>
-</html>
+{% extends "reviews/base.html" %}
+
+{% block title %}Danke für die Anfrage {% endblock %}
+{% block content %}
+<h1>Anfrage erhalten</h1>
+<h4>Danke für die Anfrage</h4>
+<p>{{ message }}</p>
+{% endblock content %}
