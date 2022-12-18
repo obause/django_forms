@@ -90,6 +90,14 @@ class ReviewDetailView(DetailView):
     template_name = "reviews/review_detail.html"
     model = Review
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        review = self.object
+        request = self.request
+        favorite_id = request.session.get("favorite_review")
+        context["is_favorite"] = review.id == int(favorite_id)
+        return context
+
 
 # class ReviewDetailView(TemplateView):
 #     template_name = "reviews/review_detail.html"
@@ -100,3 +108,10 @@ class ReviewDetailView(DetailView):
 #         review = Review.objects.get(pk=review_id)
 #         context['review'] = review
 #         return context
+
+class FavoriteView(View):
+    def post(self, request):
+        review_id = request.POST.get("review_id")
+        # review = Review.objects.get(pk=review_id)
+        request.session["favorite_review"] = review_id
+        return HttpResponseRedirect(f"/reviews/{review_id}")
